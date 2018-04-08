@@ -6,17 +6,18 @@ namespace Matricula.Infrastructure.Repository
 {
     public class Repository
     {
-        protected readonly string Path;
+        protected readonly string CaminhoInicial;
+        protected readonly string CaminhoFinal;
 
-        public Repository(string path)
+        public Repository(string caminhoInicial, string caminhoFinal)
         {
-            Path = path;
+            CaminhoInicial = caminhoInicial;
+            CaminhoFinal = caminhoFinal;
         }
 
         public void Salvar(ICollection<string> obj)
         {
-            var localPath = $@"C:\Users\lucag\Desktop\matriculasVerificadas.txt";
-            using (var escrita = new StreamWriter(localPath))
+            using (var escrita = new StreamWriter(CaminhoFinal))
             {
                 foreach (var objList in obj)
                 {
@@ -27,7 +28,7 @@ namespace Matricula.Infrastructure.Repository
 
         public ICollection<string> ListarObj()
         {
-            using (var leitura = new StreamReader(Path))
+            using (var leitura = new StreamReader(CaminhoInicial))
             {
                 ICollection<string> listaMatriculas = new List<string>();
                 string line;

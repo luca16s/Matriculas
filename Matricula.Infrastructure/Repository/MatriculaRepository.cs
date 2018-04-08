@@ -5,7 +5,7 @@ namespace Matricula.Infrastructure.Repository
 {
     public class MatriculaRepository : Repository, IMatriculaRepository
     {
-        public MatriculaRepository(string path) : base(path)
+        public MatriculaRepository(string caminhoInicial, string caminhoFinal) : base(caminhoInicial, caminhoFinal)
         {
 
         }

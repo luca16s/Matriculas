@@ -11,11 +11,6 @@ namespace Matricula.Entities
         private const int MaxLenght = 5;
         private const int MinLenght = 4;
 
-        public Matricula()
-        {
-
-        }
-
         public string Codigo
         {
             get => _codigo;

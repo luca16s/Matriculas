@@ -9,16 +9,16 @@ namespace Matricula.Apresentacao
 {
     internal class Program
     {
+        public static readonly string DiretorioPadrao =  Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
         private static void Main()
         {
             var stringBuilder = new StringBuilder();
+            var caminhoInicial = new StringBuilder();
+            var caminhoFinal = new StringBuilder();
 
             while (true)
             {
-                Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                //Uow = new UnitOfWork("");
-
-                //IEnumerable matriculas = Uow.MatriculaRepository.ListarObj();
                 Console.WriteLine("1 - Gerar aquivo com matriculas verificadas.");
                 Console.WriteLine("2 - Gerar arquivo de matriculas com digito verificados.");
                 Console.WriteLine("O que deseja verificar?");
@@ -26,10 +26,10 @@ namespace Matricula.Apresentacao
                 switch (escolha)
                 {
                     case "1":
-                        VerificarMatriculas(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), stringBuilder);
+                        VerificarMatriculas(DiretorioPadrao, stringBuilder, caminhoInicial, caminhoFinal);
                         break;
                     case "2":
-                        GerarDigitoVerificador(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), stringBuilder);
+                        GerarDigitoVerificador(DiretorioPadrao, stringBuilder, caminhoInicial, caminhoFinal);
                         break;
                     default:
                         continue;
@@ -39,11 +39,11 @@ namespace Matricula.Apresentacao
             }
         }
 
-        public static void VerificarMatriculas(string basePath, StringBuilder stringBuilder)
+        public static void VerificarMatriculas(string basePath, StringBuilder stringBuilder, StringBuilder caminhoInicial, StringBuilder caminhoFinal)
         {
-            stringBuilder.Append(basePath).Append(FileNames.MatriculasParaVerificar);
-            var uow = new UnitOfWork(stringBuilder.ToString());
-            stringBuilder.Clear();
+            caminhoInicial.Append(basePath).Append(FileNames.MatriculasParaVerificar);
+            caminhoFinal.Append(basePath).Append(FileNames.MatriculasVerificadas);
+            var uow = new UnitOfWork(caminhoInicial.ToString(), caminhoFinal.ToString());
 
             IEnumerable matriculas = uow.MatriculaRepository.ListarObj();
             var mat = new Entities.Matricula();
@@ -70,9 +70,28 @@ namespace Matricula.Apresentacao
             }
         }
 
-        public static void GerarDigitoVerificador(string basePath, StringBuilder stringBuilder)
+        public static void GerarDigitoVerificador(string basePath, StringBuilder stringBuilder, StringBuilder caminhoInicial, StringBuilder caminhoFinal)
         {
-            stringBuilder.Append(basePath).Append(FileNames.MatriculasParaVerificar);
+            caminhoInicial.Append(basePath).Append(FileNames.MatriculasSemDv);
+            caminhoFinal.Append(basePath).Append(FileNames.MatriculasComDv);
+            var uow = new UnitOfWork(caminhoInicial.ToString(), caminhoFinal.ToString());
+
+            IEnumerable matriculas = uow.MatriculaRepository.ListarObj();
+            var mat = new Entities.Matricula();
+            ICollection<string> resultado = new List<string>();
+
+            foreach (var matricula in matriculas)
+            {
+                if (matricula == null || matricula.Equals("")) continue;
+                mat.GerarDigitoVerificador(matricula.ToString().Substring(0, 4));
+
+                stringBuilder.Append(matricula).Append("-").Append(mat.Dv).AppendLine();
+                resultado.Add(stringBuilder.ToString());
+
+                stringBuilder.Clear();
+            }
+
+            uow.MatriculaRepository.Salvar(resultado);
         }
     }
 }
