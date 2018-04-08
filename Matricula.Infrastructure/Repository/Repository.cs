@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Matricula.Infrastructure.Repository
@@ -18,9 +19,17 @@ namespace Matricula.Infrastructure.Repository
         {
             using (var escrita = new StreamWriter(CaminhoFinal))
             {
-                foreach (var objList in obj)
+                try
                 {
-                    escrita.Write(objList);
+                    foreach (var objList in obj)
+                    {
+                        escrita.Write(objList);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"A lista de matrículas não pode ser salva corretamente. Exception code: {e}");
+                    throw;
                 }
             }
         }
@@ -30,12 +39,20 @@ namespace Matricula.Infrastructure.Repository
             using (var leitura = new StreamReader(CaminhoInicial))
             {
                 ICollection<string> listaMatriculas = new List<string>();
-                string line;
-                while ((line = leitura.ReadLine()) != null)
+                try
                 {
-                    listaMatriculas.Add(line);
+                    string line;
+                    while ((line = leitura.ReadLine()) != null)
+                    {
+                        listaMatriculas.Add(line);
+                    }
+                    return listaMatriculas;
                 }
-                return listaMatriculas;
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Arquivo não pode ser lido corretamente. Exception code: {e}");
+                    throw;
+                }
             }
         }
     }
