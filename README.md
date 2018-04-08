@@ -30,3 +30,5 @@ Para utilizar use o powershell e navegue até a pasta onde os arquivos foram ext
 3. Escolha a opção "1" para gerar um arquivo com as matrículas verificadas no Desktop.
 4. Escolha a opção 2 para gerar um arquivo de matrículas com dígito verificador no Desktop.
 5. Após ambas opções pode se escolher se volta para o menu principal ou sai do programa.
+
+* Link do repositório: https://github.com/luca16s/Matriculas
