@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Matricula.Interfaces.Repository;
 
 namespace Matricula.Infrastructure.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository
     {
         protected readonly string Path;
 
@@ -17,19 +13,29 @@ namespace Matricula.Infrastructure.Repository
             Path = path;
         }
 
-        public void Salvar(TEntity objEntity)
+        public void Salvar(ICollection<string> obj)
         {
-            using (var escrita = new StreamWriter(Path))
+            var localPath = $@"C:\Users\lucag\Desktop\matriculasVerificadas.txt";
+            using (var escrita = new StreamWriter(localPath))
             {
-                escrita.Write(objEntity);
+                foreach (var objList in obj)
+                {
+                    escrita.Write(objList);
+                }
             }
         }
 
-        public string ListarObj()
+        public ICollection<string> ListarObj()
         {
             using (var leitura = new StreamReader(Path))
             {
-                return leitura.ReadLine();
+                ICollection<string> listaMatriculas = new List<string>();
+                string line;
+                while ((line = leitura.ReadLine()) != null)
+                {
+                    listaMatriculas.Add(line);
+                }
+                return listaMatriculas;
             }
         }
     }

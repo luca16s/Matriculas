@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Matricula.Infrastructure.Repository;
+﻿using Matricula.Infrastructure.Repository;
 using Matricula.Interfaces.Repository;
 
 namespace Matricula.Infrastructure.UoW
 {
     public class UnitOfWork
     {
-        private readonly string _path = $@"C:\Users\lucag\Desktop\matriculasParaVerificar.txt
-";
-        private IRepository<Entities.Matricula> _matriculaRepository;
+        private readonly string _path;
 
-        public IRepository<Entities.Matricula> MatriculaRepository =>
-            _matriculaRepository ?? (_matriculaRepository = new Repository<Entities.Matricula>(_path));
+        public UnitOfWork()
+        {
+            
+        }
+        public UnitOfWork(string path)
+        {
+            _path = path;
+        }
+        // = $@"C:\Users\lucag\Desktop\matriculasParaVerificar.txt";
+        private IMatriculaRepository _matriculaRepository;
+
+        public IMatriculaRepository MatriculaRepository =>
+            _matriculaRepository ?? (_matriculaRepository = new MatriculaRepository(_path));
     }
 }

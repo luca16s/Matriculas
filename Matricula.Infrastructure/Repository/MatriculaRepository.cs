@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Matricula.Interfaces.Repository;
 
 namespace Matricula.Infrastructure.Repository
 {
-    public class MatriculaRepository : Repository<Entities.Matricula>, IMatriculaRepository
+    public class MatriculaRepository : Repository, IMatriculaRepository
     {
         public MatriculaRepository(string path) : base(path)
         {
