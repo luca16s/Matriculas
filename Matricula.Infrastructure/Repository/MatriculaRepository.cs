@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Matricula.Interfaces.Repository;
+﻿using Matricula.Interfaces.Repository;
 
 namespace Matricula.Infrastructure.Repository
 {

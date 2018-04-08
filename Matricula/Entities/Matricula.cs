@@ -17,9 +17,9 @@ namespace Matricula.Entities
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException($@"A matrícula não pode ser nula!");
+                    throw new ArgumentNullException();
                 if (!Validacoes.StringLenght(value, MinLenght, MaxLenght))
-                    throw new ArgumentOutOfRangeException($@"Matricula maior que 5 caracteres.");
+                    throw new ArgumentOutOfRangeException();
                 _codigo = value;
             }
         }
