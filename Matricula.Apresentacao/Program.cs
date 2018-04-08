@@ -9,7 +9,7 @@ namespace Matricula.Apresentacao
 {
     internal class Program
     {
-        public static readonly string DiretorioPadrao =  Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        public static readonly string DiretorioPadrao = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         private static void Main()
         {
@@ -42,10 +42,20 @@ namespace Matricula.Apresentacao
         {
             caminhoInicial.Append(basePath).Append(FileNames.MatriculasParaVerificar);
             caminhoFinal.Append(basePath).Append(FileNames.MatriculasVerificadas);
-            var uow = new UnitOfWork(caminhoInicial.ToString(), caminhoFinal.ToString());
-
-            IEnumerable matriculas = uow.MatriculaRepository.ListarObj();
             var mat = new Entities.Matricula();
+            var uow = new UnitOfWork(caminhoInicial.ToString(), caminhoFinal.ToString());
+            IEnumerable matriculas;
+
+            try
+            {
+                matriculas = uow.MatriculaRepository.ListarObj();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Arquivo não pode ser lido corretamente. Exception code: {e}");
+                throw;
+            }
+
             ICollection<string> resultado = new List<string>();
 
             foreach (var matricula in matriculas)
@@ -63,22 +73,42 @@ namespace Matricula.Apresentacao
                     stringBuilder.Append(matricula).Append(" ").Append("falso").AppendLine();
                     resultado.Add(stringBuilder.ToString());
                 }
-                uow.MatriculaRepository.Salvar(resultado);
 
                 stringBuilder.Clear();
-
-                SelecaoMenus();
             }
+
+            try
+            {
+                uow.MatriculaRepository.Salvar(resultado);
+                Console.WriteLine("Arquivo salvo com sucesso.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"A lista de matrículas não pode ser salva corretamente. Exception code: {e}");
+                throw;
+            }
+
+            SelecaoMenus();
         }
 
         public static void GerarDigitoVerificador(string basePath, StringBuilder stringBuilder, StringBuilder caminhoInicial, StringBuilder caminhoFinal)
         {
             caminhoInicial.Append(basePath).Append(FileNames.MatriculasSemDv);
             caminhoFinal.Append(basePath).Append(FileNames.MatriculasComDv);
+            var mat = new Entities.Matricula();
             var uow = new UnitOfWork(caminhoInicial.ToString(), caminhoFinal.ToString());
 
-            IEnumerable matriculas = uow.MatriculaRepository.ListarObj();
-            var mat = new Entities.Matricula();
+            IEnumerable matriculas;
+            try
+            {
+                matriculas = uow.MatriculaRepository.ListarObj();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Arquivo não pode ser lido corretamente. Exception code: {e}");
+                throw;
+            }
+
             ICollection<string> resultado = new List<string>();
 
             foreach (var matricula in matriculas)
