@@ -34,7 +34,6 @@ namespace Matricula.Apresentacao
                     default:
                         continue;
                 }
-
                 break;
             }
         }
@@ -67,6 +66,8 @@ namespace Matricula.Apresentacao
                 uow.MatriculaRepository.Salvar(resultado);
 
                 stringBuilder.Clear();
+
+                SelecaoMenus();
             }
         }
 
@@ -90,8 +91,31 @@ namespace Matricula.Apresentacao
 
                 stringBuilder.Clear();
             }
-
             uow.MatriculaRepository.Salvar(resultado);
+
+            SelecaoMenus();
+        }
+
+        public static void SelecaoMenus()
+        {
+            Console.WriteLine("Deseja voltar ao menu anterior?");
+            Console.WriteLine("1 - Sim");
+            Console.WriteLine("2 - Não");
+            var escolha = Console.ReadLine();
+
+            switch (escolha)
+            {
+                case "1":
+                    Console.Clear();
+                    Main();
+                    break;
+                case "2":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida!");
+                    break;
+            }
         }
     }
 }
