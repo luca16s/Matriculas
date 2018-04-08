@@ -1,8 +1,10 @@
-﻿namespace Matricula.Interfaces.Repository
+﻿using System.Collections.Generic;
+
+namespace Matricula.Interfaces.Repository
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository
     {
-        void Salvar(TEntity objEntity);
-        string ListarObj();
+        void Salvar(ICollection<string> obj);
+        ICollection<string> ListarObj();
     }
 }

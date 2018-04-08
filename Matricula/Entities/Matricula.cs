@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using Matricula.Especificacao;
 
 namespace Matricula.Entities
@@ -12,9 +11,9 @@ namespace Matricula.Entities
         private const int MaxLenght = 5;
         private const int MinLenght = 4;
 
-        public Matricula(string matricula)
+        public Matricula()
         {
-            Codigo = matricula;
+
         }
 
         public string Codigo
@@ -24,17 +23,19 @@ namespace Matricula.Entities
             {
                 if (value == null)
                     throw new ArgumentNullException($@"A matrícula não pode ser nula!");
-                //if (Validacoes.StringLenght(value, MinLenght, MaxLenght))
-                    //throw new ArgumentOutOfRangeException($@"Matricula maior que 5 caracteres.");
+                if (!Validacoes.StringLenght(value, MinLenght, MaxLenght))
+                    throw new ArgumentOutOfRangeException($@"Matricula maior que 5 caracteres.");
                 _codigo = value;
             }
         }
 
         public void GerarDigitoVerificador(string codigo)
         {
-            Dv = codigo.Select((t, i) => Convert.ToInt32(codigo.Substring(i))).Select((numero, i) => numero * (i + 1)).Sum().ToString("X");
+            var total = codigo.Select((t, i) => Convert.ToInt32(codigo.Substring(i, 1))).Select((numero, i) => numero * (5 - i)).Sum();
+            Dv =  (total%16).ToString("X");
         }
-
-
+            //=> Dv = codigo.Select((t, i) 
+            //    => Convert.ToInt32(codigo.Substring(i, 1))).Select((numero, i) => numero * (5 - i))
+            //    .Sum().ToString("X");
     }
 }
