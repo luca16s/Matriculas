@@ -5,17 +5,17 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{43413FD0-5E85-4960-9B01-2CFB30AC005C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matricula", "Matricula\Matricula.csproj", "{1363A68D-0641-4296-97DB-3ED8E0DEC7CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula", "Matricula\Matricula.csproj", "{1363A68D-0641-4296-97DB-3ED8E0DEC7CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matricula.Tests", "Matricula.Tests\Matricula.Tests.csproj", "{91447DA6-ED75-47AE-A3E1-A4EBCB1AE2D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Tests", "Matricula.Tests\Matricula.Tests.csproj", "{91447DA6-ED75-47AE-A3E1-A4EBCB1AE2D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestrutura", "{4F163900-F77E-4C2D-BCC7-60FF4B63306E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matricula.Infrastructure", "Matricula.Infrastructure\Matricula.Infrastructure.csproj", "{7BE6351B-FB20-4A68-B6F8-11DC4EA478CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Infrastructure", "Matricula.Infrastructure\Matricula.Infrastructure.csproj", "{7BE6351B-FB20-4A68-B6F8-11DC4EA478CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apresentacao", "Apresentacao", "{57382F03-F0BA-488E-B39F-E6397779093D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matricula.Apresentacao", "Matricula.Apresentacao\Matricula.Apresentacao.csproj", "{FE44FAC4-79E1-400F-B9E3-1A814F79AC36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Apresentacao", "Matricula.Apresentacao\Matricula.Apresentacao.csproj", "{FE44FAC4-79E1-400F-B9E3-1A814F79AC36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

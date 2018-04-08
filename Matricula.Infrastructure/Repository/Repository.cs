@@ -19,17 +19,9 @@ namespace Matricula.Infrastructure.Repository
         {
             using (var escrita = new StreamWriter(CaminhoFinal))
             {
-                try
+                foreach (var objList in obj)
                 {
-                    foreach (var objList in obj)
-                    {
-                        escrita.Write(objList);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"A lista de matrículas não pode ser salva corretamente. Exception code: {e}");
-                    throw;
+                    escrita.Write(objList);
                 }
             }
         }
@@ -39,20 +31,12 @@ namespace Matricula.Infrastructure.Repository
             using (var leitura = new StreamReader(CaminhoInicial))
             {
                 ICollection<string> listaMatriculas = new List<string>();
-                try
+                string line;
+                while ((line = leitura.ReadLine()) != null)
                 {
-                    string line;
-                    while ((line = leitura.ReadLine()) != null)
-                    {
-                        listaMatriculas.Add(line);
-                    }
-                    return listaMatriculas;
+                    listaMatriculas.Add(line);
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Arquivo não pode ser lido corretamente. Exception code: {e}");
-                    throw;
-                }
+                return listaMatriculas;
             }
         }
     }
