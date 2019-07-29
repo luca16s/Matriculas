@@ -1,23 +1,19 @@
-﻿using Matricula.Infrastructure.Repository;
-using Matricula.Interfaces.Repository;
+﻿using Matricula.Entidades.Interfaces.Repository;
+using Matricula.Infra.Repository;
 
-namespace Matricula.Infrastructure.UoW
+namespace Matricula.Infra.UoW
 {
     public class UnitOfWork
     {
         private readonly string _caminhoInicial;
         private readonly string _caminhoFinal;
 
-        public UnitOfWork()
-        {
-            
-        }
         public UnitOfWork(string caminhoInicial, string caminhoFinal)
         {
             _caminhoInicial = caminhoInicial;
             _caminhoFinal = caminhoFinal;
         }
-        // = $@"C:\Users\lucag\Desktop\matriculasParaVerificar.txt";
+
         private IMatriculaRepository _matriculaRepository;
 
         public IMatriculaRepository MatriculaRepository =>

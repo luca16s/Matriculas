@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Matricula\Matricula.csproj" />
+    <ProjectReference Include="..\Matricula.Entidade\Matricula.Entidade.csproj" />
+    <ProjectReference Include="..\Matricula\Matricula.Entidade.csproj" />
   </ItemGroup>
 
 </Project>

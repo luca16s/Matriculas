@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using Matricula.Constants;
-using Matricula.Infrastructure.UoW;
+﻿using Matricula.Controle;
+using System;
 
 namespace Matricula.Apresentacao
 {
-    internal class Program
+    internal static class Program
     {
         public static readonly string DiretorioPadrao = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         private static void Main()
         {
-            var stringBuilder = new StringBuilder();
-            var caminhoInicial = new StringBuilder();
-            var caminhoFinal = new StringBuilder();
+            var msgError = string.Empty;
+            MatriculaControle _MatriculaControle = new MatriculaControle();
 
             while (true)
             {
@@ -23,13 +18,28 @@ namespace Matricula.Apresentacao
                 Console.WriteLine("2 - Gerar arquivo de matriculas com digito verificados.");
                 Console.WriteLine("O que deseja verificar?");
                 var escolha = Console.ReadLine();
+
                 switch (escolha)
                 {
                     case "1":
-                        VerificarMatriculas(DiretorioPadrao, stringBuilder, caminhoInicial, caminhoFinal);
+                        _MatriculaControle.VerificarMatriculas(out msgError);
+
+                        if (!string.IsNullOrEmpty(msgError))
+                        {
+                            Console.WriteLine(msgError);
+                        }
+
+                        SelecaoMenus();
                         break;
                     case "2":
-                        GerarDigitoVerificador(DiretorioPadrao, stringBuilder, caminhoInicial, caminhoFinal);
+                        _MatriculaControle.GerarDigitoVerificador(out msgError);
+
+                        if (!string.IsNullOrEmpty(msgError))
+                        {
+                            Console.WriteLine(msgError);
+                        }
+
+                        SelecaoMenus();
                         break;
                     default:
                         continue;
@@ -38,99 +48,12 @@ namespace Matricula.Apresentacao
             }
         }
 
-        public static void VerificarMatriculas(string basePath, StringBuilder stringBuilder, StringBuilder caminhoInicial, StringBuilder caminhoFinal)
-        {
-            caminhoInicial.Append(basePath).Append(FileNames.MatriculasParaVerificar);
-            caminhoFinal.Append(basePath).Append(FileNames.MatriculasVerificadas);
-            var mat = new Entities.Matricula();
-            var uow = new UnitOfWork(caminhoInicial.ToString(), caminhoFinal.ToString());
-            IEnumerable matriculas;
-
-            try
-            {
-                matriculas = uow.MatriculaRepository.ListarObj();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Arquivo não pode ser lido corretamente. Exception code: {e}");
-                throw;
-            }
-
-            ICollection<string> resultado = new List<string>();
-
-            foreach (var matricula in matriculas)
-            {
-                if (matricula == null || matricula.Equals("")) continue;
-                mat.GerarDigitoVerificador(matricula.ToString().Substring(0, 4));
-
-                if (matricula.ToString().Substring(5, 1).Equals(mat.Dv))
-                {
-                    stringBuilder.Append(matricula).Append(" ").Append("verdadeiro").AppendLine();
-                    resultado.Add(stringBuilder.ToString());
-                }
-                else
-                {
-                    stringBuilder.Append(matricula).Append(" ").Append("falso").AppendLine();
-                    resultado.Add(stringBuilder.ToString());
-                }
-
-                stringBuilder.Clear();
-            }
-
-            try
-            {
-                uow.MatriculaRepository.Salvar(resultado);
-                Console.WriteLine("Arquivo salvo com sucesso.");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"A lista de matrículas não pode ser salva corretamente. Exception code: {e}");
-                throw;
-            }
-
-            SelecaoMenus();
-        }
-
-        public static void GerarDigitoVerificador(string basePath, StringBuilder stringBuilder, StringBuilder caminhoInicial, StringBuilder caminhoFinal)
-        {
-            caminhoInicial.Append(basePath).Append(FileNames.MatriculasSemDv);
-            caminhoFinal.Append(basePath).Append(FileNames.MatriculasComDv);
-            var mat = new Entities.Matricula();
-            var uow = new UnitOfWork(caminhoInicial.ToString(), caminhoFinal.ToString());
-
-            IEnumerable matriculas;
-            try
-            {
-                matriculas = uow.MatriculaRepository.ListarObj();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Arquivo não pode ser lido corretamente. Exception code: {e}");
-                throw;
-            }
-
-            ICollection<string> resultado = new List<string>();
-
-            foreach (var matricula in matriculas)
-            {
-                if (matricula == null || matricula.Equals("")) continue;
-                mat.GerarDigitoVerificador(matricula.ToString().Substring(0, 4));
-
-                stringBuilder.Append(matricula).Append("-").Append(mat.Dv).AppendLine();
-                resultado.Add(stringBuilder.ToString());
-
-                stringBuilder.Clear();
-            }
-            uow.MatriculaRepository.Salvar(resultado);
-
-            SelecaoMenus();
-        }
-
         public static void SelecaoMenus()
         {
             Console.WriteLine("Deseja voltar ao menu anterior?");
             Console.WriteLine("1 - Sim");
             Console.WriteLine("2 - Não");
+
             var escolha = Console.ReadLine();
 
             switch (escolha)

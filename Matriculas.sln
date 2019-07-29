@@ -5,17 +5,23 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{43413FD0-5E85-4960-9B01-2CFB30AC005C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula", "Matricula\Matricula.csproj", "{1363A68D-0641-4296-97DB-3ED8E0DEC7CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Entidade", "Matricula.Entidade\Matricula.Entidade.csproj", "{1363A68D-0641-4296-97DB-3ED8E0DEC7CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Tests", "Matricula.Tests\Matricula.Tests.csproj", "{91447DA6-ED75-47AE-A3E1-A4EBCB1AE2D8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestrutura", "{4F163900-F77E-4C2D-BCC7-60FF4B63306E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Infrastructure", "Matricula.Infrastructure\Matricula.Infrastructure.csproj", "{7BE6351B-FB20-4A68-B6F8-11DC4EA478CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Infra", "Matricula.Infra\Matricula.Infra.csproj", "{7BE6351B-FB20-4A68-B6F8-11DC4EA478CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apresentacao", "Apresentacao", "{57382F03-F0BA-488E-B39F-E6397779093D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matricula.Apresentacao", "Matricula.Apresentacao\Matricula.Apresentacao.csproj", "{FE44FAC4-79E1-400F-B9E3-1A814F79AC36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controle", "Controle", "{1237B348-774C-4C93-A654-C6C498441F56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestrutura", "{5EC74AE5-9CED-4DD6-AEB4-882AF3B693A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matricula.Controle", "Matricula.Controle\Matricula.Controle.csproj", "{6723476D-D906-4EB1-B1E4-A67E4071DCAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matricula.Modelo", "Matricula.Modelo\Matricula.Modelo.csproj", "{B283FFE4-D1A5-434C-ADE1-4DB1F3BB3C15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,14 @@ Global
 		{FE44FAC4-79E1-400F-B9E3-1A814F79AC36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE44FAC4-79E1-400F-B9E3-1A814F79AC36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE44FAC4-79E1-400F-B9E3-1A814F79AC36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6723476D-D906-4EB1-B1E4-A67E4071DCAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6723476D-D906-4EB1-B1E4-A67E4071DCAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6723476D-D906-4EB1-B1E4-A67E4071DCAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6723476D-D906-4EB1-B1E4-A67E4071DCAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B283FFE4-D1A5-434C-ADE1-4DB1F3BB3C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B283FFE4-D1A5-434C-ADE1-4DB1F3BB3C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B283FFE4-D1A5-434C-ADE1-4DB1F3BB3C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B283FFE4-D1A5-434C-ADE1-4DB1F3BB3C15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,8 +60,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1363A68D-0641-4296-97DB-3ED8E0DEC7CC} = {43413FD0-5E85-4960-9B01-2CFB30AC005C}
 		{91447DA6-ED75-47AE-A3E1-A4EBCB1AE2D8} = {43413FD0-5E85-4960-9B01-2CFB30AC005C}
-		{7BE6351B-FB20-4A68-B6F8-11DC4EA478CD} = {4F163900-F77E-4C2D-BCC7-60FF4B63306E}
+		{7BE6351B-FB20-4A68-B6F8-11DC4EA478CD} = {5EC74AE5-9CED-4DD6-AEB4-882AF3B693A8}
 		{FE44FAC4-79E1-400F-B9E3-1A814F79AC36} = {57382F03-F0BA-488E-B39F-E6397779093D}
+		{6723476D-D906-4EB1-B1E4-A67E4071DCAD} = {1237B348-774C-4C93-A654-C6C498441F56}
+		{B283FFE4-D1A5-434C-ADE1-4DB1F3BB3C15} = {43413FD0-5E85-4960-9B01-2CFB30AC005C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28C678BF-19F9-4A44-8A67-9A55F68D9E48}

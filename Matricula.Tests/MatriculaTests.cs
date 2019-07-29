@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Matricula = Matricula.Entities.Matricula;
+﻿using Matricula = Matricula.Entidade.Matricula;
 
 namespace Matricula.Tests
 {

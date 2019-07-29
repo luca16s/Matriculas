@@ -1,4 +1,4 @@
-﻿namespace Matricula.Validacoes
+﻿namespace Matricula.Entidades.Validacoes
 {
     public class ValidacaoMatricula
     {

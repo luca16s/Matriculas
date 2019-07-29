@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Matricula.Infrastructure.Repository
+namespace Matricula.Infra.Repository
 {
     public class Repository
     {
@@ -14,22 +14,22 @@ namespace Matricula.Infrastructure.Repository
             CaminhoFinal = caminhoFinal;
         }
 
-        public void Salvar(ICollection<string> obj)
+        public void Salvar(List<string> obj)
         {
             using (var escrita = new StreamWriter(CaminhoFinal))
             {
                 foreach (var objList in obj)
                 {
-                    escrita.Write(objList);
+                    escrita.WriteLine(objList);
                 }
             }
         }
 
-        public ICollection<string> ListarObj()
+        public List<string> ListarObj()
         {
             using (var leitura = new StreamReader(CaminhoInicial))
             {
-                ICollection<string> listaMatriculas = new List<string>();
+                List<string> listaMatriculas = new List<string>();
                 string line;
                 while ((line = leitura.ReadLine()) != null)
                 {

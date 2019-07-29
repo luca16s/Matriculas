@@ -1,6 +1,6 @@
-﻿using Matricula.Interfaces.Repository;
+﻿using Matricula.Entidades.Interfaces.Repository;
 
-namespace Matricula.Infrastructure.Repository
+namespace Matricula.Infra.Repository
 {
     public class MatriculaRepository : Repository, IMatriculaRepository
     {
