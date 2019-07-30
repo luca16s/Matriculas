@@ -1,4 +1,6 @@
-﻿using Matricula.Constants;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using Matricula.Constants;
 using Matricula.Infra.UoW;
 using Matricula.Modelo;
 using System;
@@ -38,24 +40,46 @@ namespace Matricula.Controle
 
         public void GerarDigitoVerificador(out string msgError)
         {
+            var summary = BenchmarkRunner.Run<MatriculaModelo>();
             var matriculaModelo = new MatriculaModelo();
 
             var arquivo = LerArquivo(out msgError);
 
-            var matriculasComDv = matriculaModelo.GerarDigitoVerificador(arquivo);
+            var matriculasComDv = new List<string>();
+
+            try
+            {
+                matriculasComDv = matriculaModelo.GerarDigitoVerificador(arquivo);
+            }
+            catch (Exception ex)
+            {
+                msgError = $"{ex.Message}";
+                throw;
+            }
 
             _UnitOfWork.MatriculaRepository.Salvar(matriculasComDv);
         }
 
         public void VerificarMatriculas(out string msgError)
         {
+            var summary = BenchmarkRunner.Run<MatriculaModelo>();
             msgError = string.Empty;
 
             var matriculaModelo = new MatriculaModelo();
 
             var arquivo = LerArquivo(out msgError);
 
-            var matriculasComDv = matriculaModelo.GerarDigitoVerificador(arquivo);
+            var matriculasComDv = new List<string>();
+
+            try
+            {
+                matriculasComDv = matriculaModelo.GerarDigitoVerificador(arquivo);
+            }
+            catch (Exception ex)
+            {
+                msgError = $"{ex.Message}";
+                throw;
+            }
 
             var matriculasVerificadas = matriculaModelo.VerificarMatriculas(matriculasComDv);
 

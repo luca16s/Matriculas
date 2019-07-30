@@ -1,4 +1,5 @@
-﻿using Matricula.Controle;
+﻿using BenchmarkDotNet.Running;
+using Matricula.Controle;
 using System;
 
 namespace Matricula.Apresentacao

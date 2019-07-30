@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Matricula.Entidade\Matricula.Entidade.csproj" />
   </ItemGroup>
 

@@ -2,9 +2,19 @@
 {
     public class ValidacaoMatricula
     {
-        public static bool StringLenght(string propriedade, int minlenght, int maxLenght)
+        public static bool StringMinLenght(string propriedade, int minlenght)
         {
-            return propriedade.Length <= minlenght || propriedade.Length >= maxLenght;
+            return propriedade.Length < minlenght;
+        }
+
+        public static bool StringMaxLenght(string propriedade, int maxLenght)
+        {
+            return propriedade.Length > maxLenght;
+        }
+
+        public static bool StringLenght(string propriedade, int minLenght, int maxLenght)
+        {
+            return StringMinLenght(propriedade, minLenght) || StringMaxLenght(propriedade, maxLenght);
         }
     }
 }
